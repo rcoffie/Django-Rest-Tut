@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     
     #local apps 
     'watchlist_app',
+    
+    #third party apps 
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
