@@ -6,7 +6,7 @@ from watchlist_app.models import *
 def name_length(value):
   if len(value) < 2:
     raise serializers.ValidationError("Name is too short")
-
+""" 
 class MovieSerializer(serializers.Serializer):
   id = serializers.IntegerField(read_only=True)
   name = serializers.CharField(validators=[name_length])
@@ -24,8 +24,18 @@ class MovieSerializer(serializers.Serializer):
     instance.active = validated_data.get('active', instance.active)
     instance.save() 
     return instance
+   """
+class MovieSerializer(serializers.ModelSerializer):
+  len_name = serializers.SerializerMethodField()
   
+  class Meta:
+    model = Movie 
+    fields = "__all__"
   
+  def get_len_name(self, object):
+    length = len(object.name)
+    return length
+    
   def validate_name(self, value): 
     if len(value) < 3:
       raise serializers.ValidationError("Name is too short please")
