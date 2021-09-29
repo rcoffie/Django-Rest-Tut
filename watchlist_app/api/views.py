@@ -7,18 +7,32 @@ from rest_framework import status
 
 
 
+class StreamPlatFormList(APIView):
+  def get(self, request): 
+    platform = StreamPlatForm.objects.all()
+    serializer = StreamPlatFormSerializer(platform,many=True)
+    return Response(serializer.data)
+  
+  
+  def post(self, request):
+    serializer = StreamPlatFormSerializer(data=request.data)
+    if serializer.is_valid():
+      serializes.save() 
+      return Response(serializer.data)
+    else:
+      return Response(serializer.errors)
 
 
 class WatchList(APIView):
   def get(self , request):
-     movie = WatchList.objects.all() 
-     serializer = WatchListSerializer(movie, many=True)
+     movie = MovieList.objects.all()
+     serializer = MovieListSerializer(movie, many=True)
      return Response(serializer.data)
    
    
    
   def post(self, request):
-    serializer = WatchListSerializer(data=request.data)
+    serializer = MovieListSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data)
@@ -29,17 +43,17 @@ class WatchList(APIView):
 class WatchListDetailView(APIView):
   def get(self, request, pk):
     try: 
-      movie = WatchList.objects.get(pk=pk) 
-    except WatchList.DoesNotExist:
+      movie = MovieList.objects.get(pk=pk) 
+    except MovieList.DoesNotExist:
       return Response({'error':'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
   
-    serializer = WatchListSerializer(movie)
+    serializer = MovieListSerializer(movie)
     return Response(serializer.data)
 
   
   def put(self, request, pk):
-    movie = WatchList.objects.get(pk=pk)
-    serializer = WatchListSerializer(movie, data= request.data)
+    movie = MovieList.objects.get(pk=pk)
+    serializer = MovieListSerializer(movie, data= request.data)
     if serializer.is_valid(): 
       serializer.save() 
       return Response(serializer.data)
@@ -48,7 +62,7 @@ class WatchListDetailView(APIView):
     
   
   def delete(self, request, pk):
-    movie = WatchList.objects.get(pk=pk)
+    movie = MovieList.objects.get(pk=pk)
     movie.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
     

@@ -3,10 +3,10 @@ from watchlist_app.models import *
 
 
 
-class WatchListSerializer(serializers.ModelSerializer):
+class MovieListSerializer(serializers.ModelSerializer):
   
   class Meta:
-    models = WatchList 
+    model = MovieList 
     fields = '__all__'
     
     
