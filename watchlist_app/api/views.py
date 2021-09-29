@@ -9,16 +9,16 @@ from rest_framework import status
 
 
 
-class MovieList(APIView):
+class WatchList(APIView):
   def get(self , request):
-     movie = Movie.objects.all() 
-     serializer = MovieSerializer(movie, many=True)
+     movie = WatchList.objects.all() 
+     serializer = WatchListSerializer(movie, many=True)
      return Response(serializer.data)
    
    
    
   def post(self, request):
-    serializer = MovieSerializer(data=request.data)
+    serializer = WatchListSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data)
@@ -26,20 +26,20 @@ class MovieList(APIView):
       return Response(serializer.errors)
     
     
-class MovieDetailView(APIView):
+class WatchListDetailView(APIView):
   def get(self, request, pk):
     try: 
-      movie = Movie.objects.get(pk=pk) 
-    except Movie.DoesNotExist:
+      movie = WatchList.objects.get(pk=pk) 
+    except WatchList.DoesNotExist:
       return Response({'error':'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
   
-    serializer = MovieSerializer(movie)
+    serializer = WatchListSerializer(movie)
     return Response(serializer.data)
 
   
   def put(self, request, pk):
-    movie = Movie.objects.get(pk=pk)
-    serializer = MovieSerializer(movie, data= request.data)
+    movie = WatchList.objects.get(pk=pk)
+    serializer = WatchListSerializer(movie, data= request.data)
     if serializer.is_valid(): 
       serializer.save() 
       return Response(serializer.data)
@@ -48,7 +48,7 @@ class MovieDetailView(APIView):
     
   
   def delete(self, request, pk):
-    movie = Movie.objects.get(pk=pk)
+    movie = WatchList.objects.get(pk=pk)
     movie.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
     

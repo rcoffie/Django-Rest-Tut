@@ -11,6 +11,6 @@ app_name = "watchlist_app"
  """
  
 urlpatterns = [
-    path('',MovieList.as_view(), name="movie_list"),
-    path('<int:pk>/',MovieDetailView.as_view(), name="movie_detail"),
+    path('',WatchList.as_view(), name="movie_list"),
+    path('<int:pk>/',WatchListDetailView.as_view(), name="movie_detail"),
 ]

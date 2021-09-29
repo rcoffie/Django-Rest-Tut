@@ -3,9 +3,24 @@ from watchlist_app.models import *
 
 
 
-def name_length(value):
+class WatchListSerializer(serializers.ModelSerializer):
+  
+  class Meta:
+    models = WatchList 
+    fields = '__all__'
+    
+    
+    
+
+class StreamPlatFormSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = StreamPlatForm 
+    fields = '__all__'
+
+
+''' def name_length(value):
   if len(value) < 2:
-    raise serializers.ValidationError("Name is too short")
+    raise serializers.ValidationError("Name is too short") '''
 """ 
 class MovieSerializer(serializers.Serializer):
   id = serializers.IntegerField(read_only=True)
@@ -25,7 +40,7 @@ class MovieSerializer(serializers.Serializer):
     instance.save() 
     return instance
    """
-class MovieSerializer(serializers.ModelSerializer):
+''' class MovieSerializer(serializers.ModelSerializer):
   len_name = serializers.SerializerMethodField()
   
   class Meta:
@@ -47,7 +62,7 @@ class MovieSerializer(serializers.ModelSerializer):
       raise serializers.ValidationError("Title and Description should be the same ")
     else:
       return data 
-    
+     '''
   
   
       
