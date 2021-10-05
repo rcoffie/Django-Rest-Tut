@@ -14,4 +14,6 @@ urlpatterns = [
     path('',WatchList.as_view(), name="movie_list"),
     path('platform/',StreamPlatFormList.as_view(),name="platform"),
     path('<int:pk>/',WatchListDetailView.as_view(), name="movie_detail"),
+    path('review/',ReviewList.as_view(), name="review_list"),
+    path('review/<int:pk>/',ReviewDetail.as_view(), name='review_list')
 ]

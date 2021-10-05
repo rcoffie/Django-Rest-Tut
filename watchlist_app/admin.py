@@ -4,3 +4,4 @@ from . models import *
 # Register your models here.
 admin.site.register(MovieList)
 admin.site.register(StreamPlatForm)
+admin.site.register(Review)

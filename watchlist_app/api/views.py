@@ -4,7 +4,39 @@ from rest_framework.decorators import api_view
 from watchlist_app.models import * 
 from . serializers import *
 from rest_framework import status 
+from rest_framework import mixins, generics 
 
+
+
+
+class ReviewDetail(mixins.ListModelMixin, 
+                   mixins.UpdateModelMixin, 
+                   mixins.RetrieveModelMixin, 
+                   generics.GenericAPIView): 
+  queryset = Review.objects.all() 
+  serializer_class = ReviewSerializer 
+  
+  def get(self, request, *args, **kwargs):
+    return self.retrieve(request, *args, **kwargs)
+
+
+
+class ReviewList(mixins.ListModelMixin,
+                   mixins.CreateModelMixin, 
+                   mixins.DestroyModelMixin, 
+                   generics.GenericAPIView): 
+  queryset = Review.objects.all()
+  serializer_class = ReviewSerializer 
+  
+  def get(self, request, *args, **kwargs):
+    return self.list(request, *args, **kwargs) 
+  
+  def post(self, request, *args, **kwargs):
+    
+    return self.create(request, *args, **kwargs)
+  
+  def delete(self, request, *args, **kwargs): 
+    return self.destroy(request, *args, **kwargs)
 
 
 class StreamPlatFormList(APIView):
