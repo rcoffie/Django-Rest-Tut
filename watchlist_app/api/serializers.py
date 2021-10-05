@@ -13,6 +13,8 @@ class MovieListSerializer(serializers.ModelSerializer):
     
 
 class StreamPlatFormSerializer(serializers.ModelSerializer):
+  watchlist = MovieListSerializer(many=True, read_only=True)
+  
   class Meta:
     model = StreamPlatForm 
     fields = '__all__'
