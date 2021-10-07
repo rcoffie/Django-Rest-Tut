@@ -15,6 +15,22 @@ class ReviewList(generics.ListCreateAPIView):
   serializer_class = ReviewSerializer 
 
 
+class ReviewList(generics.ListAPIView): 
+  serializer_class = ReviewSerializer 
+  
+  def get_queryset(self):
+    pk = self.kwargs['pk']
+    return Review.objects.filter(movielist=pk)
+  
+  
+class ReviewCreate(generics.CreateAPIView):
+  serializer_class = ReviewSerializer 
+  def perform_create(self,serializer):
+    pk = self.kwargs.get('pk')
+    movielist = MovieList.objects.get(pk=pk)
+    serializer.save(movielist= movielist)
+    
+
 
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
