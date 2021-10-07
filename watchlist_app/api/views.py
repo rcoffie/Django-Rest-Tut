@@ -9,6 +9,21 @@ from rest_framework import mixins, generics
 
 
 
+
+class ReviewList(generics.ListCreateAPIView):
+  queryset = Review.objects.all() 
+  serializer_class = ReviewSerializer 
+
+
+
+
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+  queryset = Review.objects.all() 
+  serializer_class = ReviewSerializer  
+
+
+''' 
+
 class ReviewDetail(mixins.ListModelMixin, 
                    mixins.UpdateModelMixin, 
                    mixins.RetrieveModelMixin, 
@@ -37,7 +52,7 @@ class ReviewList(mixins.ListModelMixin,
   
   def delete(self, request, *args, **kwargs): 
     return self.destroy(request, *args, **kwargs)
-
+ '''
 
 class StreamPlatFormList(APIView):
   def get(self, request): 
