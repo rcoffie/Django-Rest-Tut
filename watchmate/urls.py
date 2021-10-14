@@ -19,5 +19,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('watchlist_app/',include('watchlist_app.api.urls',namespace="watchlist_app")),
+    path('api-auth',include('rest_framework.urls') ),
     
 ]

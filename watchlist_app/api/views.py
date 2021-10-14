@@ -6,6 +6,7 @@ from . serializers import *
 from rest_framework import status 
 from rest_framework import mixins, generics 
 from rest_framework.exceptions import ValidationError
+from watchlist_app.api.permissions import ReviewUserOrReadOnly
 
 
 
@@ -18,6 +19,7 @@ class ReviewList(generics.ListCreateAPIView):
 
 class ReviewList(generics.ListAPIView): 
   serializer_class = ReviewSerializer 
+  
   
   def get_queryset(self):
     pk = self.kwargs['pk']
@@ -47,7 +49,8 @@ class ReviewCreate(generics.CreateAPIView):
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Review.objects.all() 
-  serializer_class = ReviewSerializer  
+  serializer_class = ReviewSerializer
+  permission_classes = [ReviewUserOrReadOnly]
 
 
 ''' 
