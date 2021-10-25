@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework import mixins, generics 
 from rest_framework.exceptions import ValidationError
 from watchlist_app.api.permissions import ReviewUserOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -28,6 +29,7 @@ class ReviewList(generics.ListAPIView):
   
 class ReviewCreate(generics.CreateAPIView):
   serializer_class = ReviewSerializer 
+  permission_classes = [IsAuthenticated]
   
   def get_queryset(self):
     return Review.objects.all() 
